@@ -2,7 +2,6 @@
   "name": "express-swagger-typescript",
   "version": "1.0.1",
   "description": "Generate and serve swagger",
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/dotranminhchu/express-swagger-typescript.git"
@@ -16,6 +15,9 @@
   ],
   "author": "dotranminhchu",
   "license": "Unlicense",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/lodash": "^4.14.191",
