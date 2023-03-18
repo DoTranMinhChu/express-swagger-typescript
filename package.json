@@ -15,6 +15,7 @@
   ],
   "author": "dotranminhchu",
   "license": "Unlicense",
+  "type": "module",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "module": "./dist/esm/index.js",
