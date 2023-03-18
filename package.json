@@ -6,8 +6,10 @@
     "type": "git",
     "url": "https://github.com/dotranminhchu/express-swagger-typescript.git"
   },
+  "sideEffects": false,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "prepare": "npm run build"
   },
   "keywords": [
     "swagger",
