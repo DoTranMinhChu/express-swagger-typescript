@@ -1,6 +1,6 @@
 {
   "name": "express-swagger-typescript",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Generate and serve swagger",
   "repository": {
     "type": "git",
@@ -8,7 +8,8 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "tsc && tsc -p tsconfig.esm.json",
+    "rmdir": "node -e \"var fs = require('fs');process.argv.slice(1).map((fpath)=>{ try {fs.rmdirSync(fpath,{recursive: true})} catch(e){console.warn('Error folder:', fpath, e)}});process.exit(0);\"",
+    "build": "npm run rmdir -- dist  && tsc && tsc -p tsconfig.esm.json",
     "prepare": "npm run build"
   },
   "keywords": [
