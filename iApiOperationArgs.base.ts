@@ -14,7 +14,9 @@ export interface IApiOperationArgsBaseParameter {
         type?: string;
     }
 }
-
+export interface IApiParameters {
+    [key: string]: IApiOperationArgsBaseParameter
+}
 export interface IApiPropertyBodyOperationArgsBaseParameter {
     type: string;
     items: object

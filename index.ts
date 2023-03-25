@@ -27,7 +27,18 @@ export {
     ApiModelProperty,
 } from './apiModelProperty.decorator';
 export { IApiModelArgs, ApiModel } from './apiModel.decorator';
-export { IApiBodyOperationArgsBaseParameter, IApiOperationArgsBase, IApiOperationArgsBaseParameters, IApiOperationArgsBaseRequestBody, IApiOperationArgsBaseResponse, IApiOperationArgsBaseParameter, IApiPropertyBodyOperationArgsBaseParameter } from './iApiOperationArgs.base'
+export {
+    IApiBodyOperationArgsBaseParameter,
+    IApiOperationArgsBase,
+    IApiOperationArgsBaseParameters,
+    IApiOperationArgsBaseRequestBody,
+    IApiOperationArgsBaseResponse,
+    IApiOperationArgsBaseParameter,
+    IApiPropertyBodyOperationArgsBaseParameter,
+    IApiParameters
+} from './iApiOperationArgs.base'
 export { SwaggerDefinitionConstant } from './swaggerDefinition.constant';
 export { express, ISwaggerExpressOptions, swaggerData } from './express.configurator';
 export { build } from './swagger.builder';
+
+
