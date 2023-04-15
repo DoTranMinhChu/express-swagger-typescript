@@ -32,7 +32,7 @@ export interface IApiBodyOperationArgsBaseParameter
 export interface IApiOperationArgsBaseResponse {
     description?: string;
     type?: string;
-    model?: string;
+    model?: string | any;
     [key: string]: any
 }
 
