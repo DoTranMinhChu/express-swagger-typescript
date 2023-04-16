@@ -39,6 +39,7 @@ export interface IApiOperationArgsBaseResponse {
     [key: string]: any;
     
 }
+
 export interface IApiOperationArgsBaseParameters {
     header?: { [key: string]: IApiOperationArgsBaseParameter };
     path?: { [key: string]: IApiOperationArgsBaseParameter };

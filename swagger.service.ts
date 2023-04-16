@@ -582,23 +582,18 @@ export class SwaggerService {
         return requestBody
     }
 
-    private buildOperationResponses(responses: IApiOperationArgsBaseResponse): IApiOperationArgsBaseResponse {
+    private buildOperationResponses(responses: {
+        [key: string]: IApiOperationArgsBaseResponse;
+    }): {
+        [key: string]: IApiOperationArgsBaseResponse;
+    } {
         const swaggerOperationResponses: {
             [key: string]: ISwaggerOperationResponse;
         } = {};
-        responses.description
-        for (const responseIndex in responses.content) {
+        for (const responseIndex in responses) {
             const response: IApiOperationArgsBaseResponse =
-            responses.content[responseIndex] || {};
+                responses[responseIndex] || {};
             const newSwaggerOperationResponse: ISwaggerOperationResponse = {};
-            let model = response["schema"]["model"]
-            if (model) {
-                if (this.isClass(model)) {
-                    model = _.upperFirst(model.name)
-                }
-                response["schema"]['$ref'] = `#/components/schemas/${model}`
-                delete response["schema"]["model"]
-            }
             if (response.description) {
                 newSwaggerOperationResponse.description = response.description;
             } else {
@@ -659,10 +654,22 @@ export class SwaggerService {
                         newSwaggerOperationResponse.description = "";
                 }
             }
-            swaggerOperationResponses[
-                responseIndex
-            ] = newSwaggerOperationResponse;
+            console.log("response.content ====> ", response.content)
+            for (const responseIndex in response.content) {
+                const responseConent: IApiOperationArgsBaseResponse =
+                    response.content[responseIndex] || {};
+                let model = responseConent["schema"]["model"]
+                if (model) {
+                    if (this.isClass(model)) {
+                        model = _.upperFirst(model.name)
+                    }
+                    responseConent["schema"]['$ref'] = `#/components/schemas/${model}`
+                    delete responseConent["schema"]["model"]
+                }
+
+            }
         }
+        console.log("swaggerOperationResponses ====> ", swaggerOperationResponses)
         return swaggerOperationResponses;
     }
 
