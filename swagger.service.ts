@@ -654,7 +654,7 @@ export class SwaggerService {
                         newSwaggerOperationResponse.description = "";
                 }
             }
-            console.log("response.content ====> ", response.content)
+            console.log("response.content Before ====> ", response.content)
             for (const responseIndex in response.content) {
                 const responseConent: IApiOperationArgsBaseResponse =
                     response.content[responseIndex] || {};
@@ -668,9 +668,10 @@ export class SwaggerService {
                 }
 
             }
+            console.log("response.content After ====> ", response.content)
         }
-        console.log("swaggerOperationResponses ====> ", swaggerOperationResponses)
-        return swaggerOperationResponses;
+        console.log("swaggerOperationResponses ====> ", responses)
+        return responses;
     }
 
     private buildBodyOperationParameter(
