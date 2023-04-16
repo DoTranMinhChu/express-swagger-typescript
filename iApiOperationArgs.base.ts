@@ -31,11 +31,14 @@ export interface IApiBodyOperationArgsBaseParameter
 
 export interface IApiOperationArgsBaseResponse {
     description?: string;
-    type?: string;
-    model?: string | any;
-    [key: string]: any
+    content?: {
+        [produce: string]: {
+            schema: IApiBodyOperationArgsBaseParameter
+        }
+    };
+    [key: string]: any;
+    
 }
-
 export interface IApiOperationArgsBaseParameters {
     header?: { [key: string]: IApiOperationArgsBaseParameter };
     path?: { [key: string]: IApiOperationArgsBaseParameter };
@@ -43,9 +46,6 @@ export interface IApiOperationArgsBaseParameters {
     body?: IApiBodyOperationArgsBaseParameter; // use only for POST, PUT and PATCH
     formData?: { [key: string]: IApiOperationArgsBaseParameter };
     schema?: any;
-}
-export interface IApiOperationArgsBaseRequestBody {
-
 }
 export interface IApiOperationArgsBaseRequestBody {
     description?: string;
@@ -56,7 +56,16 @@ export interface IApiOperationArgsBaseRequestBody {
         }
     };
 }
-
+export interface IApiOperationArgsBaseRequest {
+    description?: string;
+    content?: {
+        [produce: string]: {
+            schema: IApiBodyOperationArgsBaseParameter
+        }
+    };
+    [key: string]: any;
+    
+}
 
 export interface IApiOperationArgsBase {
     operationId?: string

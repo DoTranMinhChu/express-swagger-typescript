@@ -9,6 +9,7 @@ import {
     IApiBodyOperationArgsBaseParameter,
     IApiOperationArgsBase,
     IApiOperationArgsBaseParameter,
+    IApiOperationArgsBaseRequest,
     IApiOperationArgsBaseRequestBody,
     IApiOperationArgsBaseResponse,
 } from './iApiOperationArgs.base';
@@ -566,7 +567,7 @@ export class SwaggerService {
     }
     private buildOperationRequestBody(requestBody: IApiOperationArgsBaseRequestBody): IApiOperationArgsBaseRequestBody {
         for (const requestIndex in requestBody.content) {
-            const request: IApiOperationArgsBaseResponse =
+            const request: IApiOperationArgsBaseRequest =
                 requestBody.content[requestIndex] || {};
             let model = request["schema"]["model"]
             if (model) {
@@ -581,18 +582,23 @@ export class SwaggerService {
         return requestBody
     }
 
-    private buildOperationResponses(responses: {
-        [key: string]: IApiOperationArgsBaseResponse;
-    }): {
-        [key: string]: ISwaggerOperationResponse;
-    } {
+    private buildOperationResponses(responses: IApiOperationArgsBaseResponse): IApiOperationArgsBaseResponse {
         const swaggerOperationResponses: {
             [key: string]: ISwaggerOperationResponse;
         } = {};
-        for (const responseIndex in responses) {
+        responses.description
+        for (const responseIndex in responses.content) {
             const response: IApiOperationArgsBaseResponse =
-                responses[responseIndex] || {};
+            responses.content[responseIndex] || {};
             const newSwaggerOperationResponse: ISwaggerOperationResponse = {};
+            let model = response["schema"]["model"]
+            if (model) {
+                if (this.isClass(model)) {
+                    model = _.upperFirst(model.name)
+                }
+                response["schema"]['$ref'] = `#/components/schemas/${model}`
+                delete response["schema"]["model"]
+            }
             if (response.description) {
                 newSwaggerOperationResponse.description = response.description;
             } else {
@@ -652,26 +658,6 @@ export class SwaggerService {
                     default:
                         newSwaggerOperationResponse.description = "";
                 }
-            }
-            if (response.model) {
-                const ref = this.buildRef(response.model);
-                let newSwaggerOperationResponseSchema: ISwaggerOperationSchema = {
-                    $ref: ref,
-                };
-                if (
-                    _.isEqual(
-                        response.type,
-                        SwaggerDefinitionConstant.Response.Type.ARRAY
-                    )
-                ) {
-                    newSwaggerOperationResponseSchema = {
-                        items: {
-                            $ref: ref,
-                        } as ISwaggerOperationSchemaItems,
-                        type: SwaggerDefinitionConstant.Response.Type.ARRAY,
-                    };
-                }
-                newSwaggerOperationResponse.schema = newSwaggerOperationResponseSchema;
             }
             swaggerOperationResponses[
                 responseIndex
