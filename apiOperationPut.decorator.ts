@@ -7,6 +7,9 @@ export function ApiOperationPut(args: IApiOperationPutArgs): MethodDecorator {
         target: any,
         propertyKey: string | symbol,
     ) => {
+        if (args.operationId) {
+            propertyKey = args.operationId
+        }
         SwaggerService.getInstance().addOperationPut(args, target, propertyKey);
     };
 }

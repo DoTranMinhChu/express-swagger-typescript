@@ -118,7 +118,7 @@ export interface IApiOperationArgsBase {
     /**
      * Define responses
      */
-    responses: { [key: string]: IApiOperationArgsBaseResponse };
+    responses?: { [key: string]: IApiOperationArgsBaseResponse };
 
     /**
      * Define security

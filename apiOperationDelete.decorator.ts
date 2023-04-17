@@ -9,6 +9,9 @@ export function ApiOperationDelete(
         target: any,
         propertyKey: string | symbol,
     ) => {
+        if (args.operationId) {
+            propertyKey = args.operationId
+        }
         SwaggerService.getInstance().addOperationDelete(
             args,
             target,

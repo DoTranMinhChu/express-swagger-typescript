@@ -597,7 +597,7 @@ export class SwaggerService {
             if (response.description) {
                 newSwaggerOperationResponse.description = response.description;
             } else {
-                switch (responseIndex) {
+                switch (`${responseIndex}`) {
                     case '200':
                         newSwaggerOperationResponse.description = 'Success';
                         break;

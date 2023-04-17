@@ -9,6 +9,9 @@ export function ApiOperationPatch(
         target: any,
         propertyKey: string | symbol,
     ) => {
+        if (args.operationId) {
+            propertyKey = args.operationId
+        }
         SwaggerService.getInstance().addOperationPatch(
             args,
             target,
