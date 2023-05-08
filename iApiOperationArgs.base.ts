@@ -19,7 +19,7 @@ export interface IApiParameters {
 }
 export interface IApiPropertyBodyOperationArgsBaseParameter {
     type: string;
-    exmaple:any;
+    example?:any;
     items?: object;
     required?: boolean;
 }
