@@ -365,8 +365,19 @@ export class SwaggerService {
                 swaggerBuildDefinitionModelProperty.description = args.description;
             if (args.enum)
                 swaggerBuildDefinitionModelProperty.enum = args.enum;
-            if (args.itemType)
-                swaggerBuildDefinitionModelProperty.itemType = args.itemType;
+            if (args.itemType){
+                let itemType = args.itemType;
+                if (itemType) {
+                    if (this.isClass(itemType)) {
+                        itemType = _.upperFirst(itemType.name)
+                    }
+                    swaggerBuildDefinitionModelProperty.itemType = {
+                        $ref :  `#/components/schemas/${itemType}`
+                    }
+                  
+                }
+            }
+              
             if (args.example)
                 swaggerBuildDefinitionModelProperty.example = args.example;
             if (args.format)
