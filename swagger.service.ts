@@ -151,9 +151,16 @@ export class SwaggerService {
                 if (property.example)
                     newProperty.example = property.example;
                 if (property.itemType) {
-                    newProperty.items = {
-                        type: property.itemType,
-                    } as ISwaggerDefinitionPropertyItems;
+                    if(typeof property.itemType == "string"){
+                        newProperty.items = {
+                            type: property.itemType,
+                        } as ISwaggerDefinitionPropertyItems;
+                    }else if(typeof property.itemType =="object"){
+                        newProperty.items = {
+                           ...property.itemType,
+                        } as ISwaggerDefinitionPropertyItems;
+                    }
+                   
                 }
                 if (property.model) {
                     if (
