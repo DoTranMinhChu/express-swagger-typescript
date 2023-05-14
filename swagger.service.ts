@@ -376,11 +376,14 @@ export class SwaggerService {
                 let itemType = args.itemType;
                 if (itemType) {
                     if (this.isClass(itemType)) {
-                        itemType = _.upperFirst(itemType.name)
+                        itemType = _.upperFirst(itemType.name);
+                        swaggerBuildDefinitionModelProperty.itemType = {
+                            $ref :  `#/components/schemas/${itemType}`
+                        }
+                    }else{
+                        swaggerBuildDefinitionModelProperty.itemType = itemType
                     }
-                    swaggerBuildDefinitionModelProperty.itemType = {
-                        $ref :  `#/components/schemas/${itemType}`
-                    }
+                  
                   
                 }
             }

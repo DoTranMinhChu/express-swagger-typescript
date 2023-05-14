@@ -1,6 +1,6 @@
 {
   "name": "express-swagger-typescript",
-  "version": "1.0.19",
+  "version": "1.0.21",
   "description": "Generate and serve swagger",
   "repository": {
     "type": "git",
