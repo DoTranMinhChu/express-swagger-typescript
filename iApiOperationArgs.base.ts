@@ -13,6 +13,9 @@ export interface IApiOperationArgsBaseParameter {
         type?: string;
         model?: string | any;
         $ref?: string;
+        enum?: any;
+        default?: any;
+
     };
     items?: {
         type?: string;
