@@ -9,7 +9,11 @@ export interface IApiOperationArgsBaseParameter {
     default?: any;
     deprecated?: boolean;
     allowEmptyValue?: boolean;
-    schema?: object;
+    schema?: {
+        type?: string;
+        model?: string | any;
+        $ref?: string;
+    };
     items?: {
         type?: string;
     }
@@ -19,7 +23,7 @@ export interface IApiParameters {
 }
 export interface IApiPropertyBodyOperationArgsBaseParameter {
     type: string;
-    example?:any;
+    example?: any;
     items?: object;
     required?: boolean;
 }
@@ -38,7 +42,7 @@ export interface IApiOperationArgsBaseResponse {
         }
     };
     [key: string]: any;
-    
+
 }
 
 export interface IApiOperationArgsBaseParameters {
@@ -66,7 +70,7 @@ export interface IApiOperationArgsBaseRequest {
         }
     };
     [key: string]: any;
-    
+
 }
 
 export interface IApiOperationArgsBase {

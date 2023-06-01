@@ -151,16 +151,16 @@ export class SwaggerService {
                 if (property.example)
                     newProperty.example = property.example;
                 if (property.itemType) {
-                    if(typeof property.itemType == "string"){
+                    if (typeof property.itemType == "string") {
                         newProperty.items = {
                             type: property.itemType,
                         } as ISwaggerDefinitionPropertyItems;
-                    }else if(typeof property.itemType =="object"){
+                    } else if (typeof property.itemType == "object") {
                         newProperty.items = {
-                           ...property.itemType,
+                            ...property.itemType,
                         } as ISwaggerDefinitionPropertyItems;
                     }
-                   
+
                 }
                 if (property.model) {
                     if (
@@ -372,22 +372,22 @@ export class SwaggerService {
                 swaggerBuildDefinitionModelProperty.description = args.description;
             if (args.enum)
                 swaggerBuildDefinitionModelProperty.enum = args.enum;
-            if (args.itemType){
+            if (args.itemType) {
                 let itemType = args.itemType;
                 if (itemType) {
                     if (this.isClass(itemType)) {
                         itemType = _.upperFirst(itemType.name);
                         swaggerBuildDefinitionModelProperty.itemType = {
-                            $ref :  `#/components/schemas/${itemType}`
+                            $ref: `#/components/schemas/${itemType}`
                         }
-                    }else{
+                    } else {
                         swaggerBuildDefinitionModelProperty.itemType = itemType
                     }
-                  
-                  
+
+
                 }
             }
-              
+
             if (args.example)
                 swaggerBuildDefinitionModelProperty.example = args.example;
             if (args.format)
@@ -795,8 +795,23 @@ export class SwaggerService {
 
             if (parameter.type)
                 newSwaggerOperationParameter.type = parameter.type;
-            if (parameter.schema)
-                newSwaggerOperationParameter.schema = parameter.schema
+            if (parameter.schema) {
+                newSwaggerOperationParameter.schema = parameter.schema;
+                if (parameter.schema.model) {
+                    if (!newSwaggerOperationParameter.schema) newSwaggerOperationParameter.schema = {}
+                    newSwaggerOperationParameter.schema.$ref = this.buildRef(parameter.schema.model);
+
+                    delete newSwaggerOperationParameter.schema.model
+                    delete parameter.schema.model
+                }
+
+
+            }
+
+
+
+
+
 
 
             if (parameter.items)

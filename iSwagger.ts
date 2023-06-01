@@ -65,6 +65,7 @@ export interface ISwaggerOperationSchema {
     $ref?: string;
     format?: string;
     required?: string[]; // Array content name of property
+    model?: any | string;
     properties?: { [key: string]: ISwaggerPropertySchemaOperation }
 }
 
