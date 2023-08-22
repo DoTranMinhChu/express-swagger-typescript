@@ -112,6 +112,8 @@ export default swaggerData;
 ```
 
 ```ts
+// app.ts
+
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "......./swagger.config";
 
@@ -124,6 +126,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 ```ts
 //ThumbnailRequest
+
 import { ApiModel, ApiModelProperty } from "express-swagger-typescript";
 
 export enum EUrlType {
@@ -155,6 +158,8 @@ export class ThumbnailRequest {
 ```
 
 ```ts
+// CreatePostRequest
+
 import {
   ApiModel,
   ApiModelProperty,
@@ -184,7 +189,7 @@ export class CreatePostRequest {
 ```
 
 ```ts
-// PostResponse
+// PostResponse.ts
 import {
   ApiModel,
   ApiModelProperty,
@@ -252,6 +257,8 @@ export class PostResponse {
 - Define API method POST
 
 ```ts
+    // Post API
+
     //...
     @ApiOperationPost({
         path: "",
