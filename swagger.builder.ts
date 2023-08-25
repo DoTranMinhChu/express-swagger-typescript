@@ -93,7 +93,11 @@ export interface ISwaggerBuildDefinition {
    * Optional. Default is "/".
    */
   basePath?: string;
-
+  /**
+   * Base URL for all API.
+   * Optional. Default is "/".
+   */
+  prefixPath?: string;
   /**
    * Version Open API
    * Optional.
@@ -173,6 +177,9 @@ export function build(buildDefinition: ISwaggerBuildDefinition): void {
   );
   if (buildDefinition.basePath) {
     SwaggerService.getInstance().setBasePath(buildDefinition.basePath);
+  }
+  if (buildDefinition.prefixPath) {
+    SwaggerService.getInstance().setPrefixPath(buildDefinition.prefixPath);
   }
   if (buildDefinition.openapi) {
     SwaggerService.getInstance().setOpenapi(buildDefinition.openapi);
