@@ -70,6 +70,7 @@ export class SwaggerService {
   private globalResponses: { [key: string]: IApiOperationArgsBaseResponse } =
     {};
   private prefixPath: string = "";
+  private prefixed: Boolean = false;
   public resetData(): void {
     this.controllerMap = {};
     this.initData();
@@ -82,14 +83,16 @@ export class SwaggerService {
   public setPrefixPath(prefixPath: string): void {
     this.prefixPath = prefixPath;
     const cleanBasePath = this.prefixPath.replace(/\/+$/, "");
+    if (!this.prefixed) {
+      for (const property in this.controllerMap) {
+        const cleanEndpoint = this.controllerMap[property].path.replace(
+          /^\/+/,
+          ""
+        );
 
-    for (const property in this.controllerMap) {
-      const cleanEndpoint = this.controllerMap[property].path.replace(
-        /^\/+/,
-        ""
-      );
-
-      this.controllerMap[property].path = `${cleanBasePath}/${cleanEndpoint}`;
+        this.controllerMap[property].path = `${cleanBasePath}/${cleanEndpoint}`;
+      }
+      this.prefixed = true;
     }
   }
   public setBasePath(basePath: string): void {
